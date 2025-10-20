@@ -1,14 +1,17 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/chat.js", "use": "@vercel/node" },
-    { "src": "*.html", "use": "@vercel/static" },
-    { "src": "*.css", "use": "@vercel/static" },
-    { "src": "*.js", "use": "@vercel/static" },
-    { "src": "avatar.png", "use": "@vercel/static" }
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "home.html", "use": "@vercel/static" },
+    { "src": "goal.html", "use": "@vercel/static" },
+    { "src": "lang.html", "use": "@vercel/static" },
+    { "src": "style.css", "use": "@vercel/static" },
+    { "src": "script.js", "use": "@vercel/static" },
+    { "src": "api/chat.js", "use": "@vercel/node" }
   ],
   "routes": [
     { "src": "/api/chat", "dest": "/api/chat.js" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
+
