@@ -1,0 +1,10 @@
+{
+  "name": "ent-mentor",
+  "version": "1.0.0",
+  "description": "ENT Mentor AI psychologist function",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
