@@ -244,10 +244,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const response = await fetch("/.netlify/functions/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMsg }), // ✅ ключевой фикс
-      });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    message: userMsg  // 👈 теперь сервер поймёт запрос
+  }),
+});
 
       const data = await response.json();
       const reply = data.reply || "Қате орын алды 😔";
