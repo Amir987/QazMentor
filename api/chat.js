@@ -1,49 +1,46 @@
-// ✅ Исправленный вариант для Vercel (Node.js 18+)
-export default async function handler(req, res) {
-  try {
-    // Читаем тело запроса (универсально для разных Node-сред)
-    const body = req.body || await new Promise((resolve, reject) => {
-      let data = "";
-      req.on("data", chunk => { data += chunk });
-      req.on("end", () => {
-        try {
-          resolve(JSON.parse(data || "{}"));
-        } catch (err) {
-          reject(err);
-        }
-      });
-    });
+// ✅ Рабочий вариант для Vercel (ESM формат)
+export const config = {
+  runtime: "edge",
+};
 
+export default async function handler(req) {
+  try {
+    const body = await req.json();
     const { messages } = body;
 
     if (!messages) {
-      return res.status(400).json({ error: "No messages provided" });
+      return new Response(JSON.stringify({ error: "No messages provided" }), {
+        status: 400,
+      });
     }
 
-    // Запрос к OpenAI API
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
-        messages
-      })
+        messages,
+      }),
     });
 
-    // Ответ от OpenAI
     const data = await response.json();
-    res.status(200).json(data);
 
+    return new Response(JSON.stringify(data), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
-    console.error("❌ Ошибка сервера:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error("❌ Ошибка:", error);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
+      status: 500,
+    });
   }
 }
 
-}
+
 
 
 
