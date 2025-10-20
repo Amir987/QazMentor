@@ -216,3 +216,56 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// ---------- AI PSYCHOLOGIST CHAT (updated endpoint) ----------
+(function() {
+  const chatBox = document.querySelector(".chat-box") || document.getElementById("chatBox");
+  const chatInput = document.getElementById("chatInput");
+  const sendBtn = document.getElementById("sendMsgBtn") || document.querySelector(".chat-input button");
+
+  if (!chatBox || !chatInput || !sendBtn) return;
+
+  async function sendAiMessage() {
+    const userMsg = chatInput.value.trim();
+    if (!userMsg) return;
+
+    const userBubble = document.createElement("div");
+    userBubble.className = "chat-message user";
+    userBubble.textContent = userMsg;
+    chatBox.appendChild(userBubble);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    chatInput.value = "";
+
+    const aiBubble = document.createElement("div");
+    aiBubble.className = "chat-message ai";
+    aiBubble.textContent = "Психолог думает...";
+    chatBox.appendChild(aiBubble);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    try {
+      const messages = [
+        { role: "system", content: "Ты — дружелюбный ИИ-психолог, который помогает школьникам готовиться к ЕНТ. Поддерживай, мотивируй, отвечай коротко, понятно и тепло." },
+        { role: "user", content: userMsg }
+      ];
+
+      const response = await fetch("/.netlify/functions/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages }),
+      });
+
+      const data = await response.json();
+      const reply = data.choices?.[0]?.message?.content || data.reply || "Ошибка в ответе 😔";
+      aiBubble.textContent = reply;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (err) {
+      aiBubble.textContent = "Ошибка соединения с ИИ 😔";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  }
+
+  sendBtn.addEventListener("click", sendAiMessage);
+  chatInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendAiMessage();
+  });
+})();
