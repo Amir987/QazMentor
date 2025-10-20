@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// ---------- AI PSYCHOLOGIST CHAT (updated endpoint) ----------
+// ---------- AI PSYCHOLOGIST CHAT (fixed version) ----------
 (function() {
   const chatBox = document.querySelector(".chat-box") || document.getElementById("chatBox");
   const chatInput = document.getElementById("chatInput");
@@ -243,19 +243,14 @@ document.addEventListener("DOMContentLoaded", () => {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
-      const messages = [
-        { role: "system", content: "Ты — дружелюбный ИИ-психолог, который помогает школьникам готовиться к ЕНТ. Поддерживай, мотивируй, отвечай коротко, понятно и тепло." },
-        { role: "user", content: userMsg }
-      ];
-
       const response = await fetch("/.netlify/functions/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({ message: userMsg }), // ✅ ключевой фикс
       });
 
       const data = await response.json();
-      const reply = data.choices?.[0]?.message?.content || data.reply || "Ошибка в ответе 😔";
+      const reply = data.reply || "Қате орын алды 😔";
       aiBubble.textContent = reply;
       chatBox.scrollTop = chatBox.scrollHeight;
     } catch (err) {
