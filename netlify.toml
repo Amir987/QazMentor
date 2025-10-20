@@ -1,0 +1,19 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[functions]
+  node_bundler = "esbuild"
+
+# Разрешаем маршруты и подключаем фронтенд
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Добавляем CORS-заголовки для ИИ-функции
+[[headers]]
+  for = "/.netlify/functions/chat"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type"
