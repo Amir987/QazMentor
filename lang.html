@@ -95,10 +95,14 @@
 <body>
 
   <div class="lang-box">
-    <img src="avatar.png" alt="ENT Mentor Logo" class="logo">
+    <!-- ✅ Путь к аватарке исправлен -->
+    <img src="./avatar.png" alt="ENT Mentor Logo" class="logo">
     <h2>Тілді таңдаңыз / Выберите язык</h2>
+
+    <!-- Кнопки выбора -->
     <button class="btn" id="btnKZ">Қазақ тілі 🇰🇿</button>
     <button class="btn" id="btnRU">Русский 🇷🇺</button>
+
     <div class="footer">ENT Mentor © 2025</div>
   </div>
 
@@ -110,15 +114,21 @@
     btnRU.addEventListener("click", () => selectLang("ru"));
 
     function selectLang(lang) {
+      // Сохраняем выбранный язык
       localStorage.setItem("ent_lang", lang);
 
+      // Анимация исчезновения
       document.body.classList.add("fade-out");
+
+      // Плавный переход на страницу регистрации
       setTimeout(() => {
-        window.location.href = "index.html"; // переход на регистрацию
+        window.location.href = "index.html"; // ✅ путь без слеша
       }, 600);
     }
   </script>
 
 </body>
 </html>
+
+
 
