@@ -1,0 +1,17 @@
+[build]
+  # Папка, где лежат твои serverless-функции
+  functions = "netlify/functions"
+
+  # Папка с сайтом — у тебя файлы (index.html, home.html и т.д.) лежат в корне
+  publish = "."
+
+[functions]
+  # Разрешаем сетевые запросы (например, к OpenAI API)
+  node_bundler = "esbuild"
+  external_node_modules = ["node-fetch"]
+
+[[redirects]]
+  # Перенаправление всех запросов на index.html (SPA поддержка)
+  from = "/*"
+  to = "/index.html"
+  status = 200
