@@ -1,0 +1,557 @@
+/* =======================================================
+   QAZ MENTOR — BASE STYLE (BLACK & WHITE THEME)
+   Author: Amirlan
+   ======================================================= */
+
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+}
+
+p {
+  font-weight: 300;
+  line-height: 1.5em;
+}
+
+/* ---------- LOADER ---------- */
+.loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  z-index: 9999;
+}
+
+.loader-logo {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  from { color: #888; text-shadow: 0 0 5px #444; }
+  to { color: #fff; text-shadow: 0 0 20px #fff; }
+}
+
+.loader-spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ---------- TRANSITIONS ---------- */
+.hidden { display: none; }
+.active { display: block; }
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- REGISTRATION ---------- */
+.register-box {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; max-width: 400px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255,255,255,0.05);
+  transition: all 0.3s ease;
+}
+
+.register-box h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+.register-box .subtitle {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.lang-choose {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.lang-btn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.lang-btn.active, .lang-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+.form input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  color: #000;
+  font-weight: 500;
+}
+
+#registerBtn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#registerBtn:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.or {
+  margin-top: 10px;
+  opacity: 0.6;
+}
+
+.social-login {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.social-login button {
+  width: 48%;
+  padding: 10px;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.social-login button:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  width: 100%;
+  height: 100%;
+  padding: 80px 20px 120px;
+  overflow-y: auto;
+  position: absolute;
+  top: 0; left: 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.header h2 {
+  font-size: 1.5rem;
+}
+
+/* ---------- HOME ---------- */
+.welcome {
+  text-align: center;
+  margin-top: 30px;
+}
+#welcomeText {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+#userGoalText {
+  opacity: 0.8;
+  margin-top: 5px;
+}
+
+.news-container {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.news-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 20px;
+  transition: 0.3s;
+}
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+.news-card h4 { margin-bottom: 10px; font-weight: 600; }
+.news-card p { font-size: 0.9rem; opacity: 0.8; margin-bottom: 10px; }
+.news-card span { font-size: 0.8rem; opacity: 0.5; }
+
+/* ---------- LESSONS ---------- */
+#lessonsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.lesson-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.lesson-card:hover {
+  background: rgba(255,255,255,0.1);
+}
+.lesson-card h4 { margin-bottom: 8px; }
+.lesson-card p {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* ---------- ENT TEST ---------- */
+.ent-setup {
+  text-align: center;
+  margin-top: 20px;
+}
+#entSubjects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+#entSubjects label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+#entSubjects input {
+  margin-right: 8px;
+}
+#startEntBtn {
+  background: #fff;
+  color: #000;
+  border-radius: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#startEntBtn:hover {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+/* ---------- AI PSYCHOLOGIST ---------- */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.chat-box {
+  width: 100%;
+  max-width: 500px;
+  height: 60vh;
+  overflow-y: auto;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 15px;
+}
+.chat-message {
+  margin-bottom: 10px;
+  line-height: 1.4em;
+}
+.chat-message.user { text-align: right; }
+.chat-message.ai { text-align: left; opacity: 0.9; }
+
+#chatInput {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #fff;
+  color: #000;
+}
+#sendMsgBtn {
+  margin-top: 10px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#sendMsgBtn:hover { background: transparent; color: #fff; border: 1px solid #fff; }
+
+/* ---------- NOTES ---------- */
+.notes-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+#noteTitle, #noteContent {
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  color: #000;
+}
+#addNoteBtn {
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+}
+#notesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+.note-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 15px;
+  position: relative;
+}
+.note-card h4 { margin-bottom: 10px; }
+.note-card button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ---------- PROFILE ---------- */
+.profile-box {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.profile-box p { margin-bottom: 8px; }
+.results, .motivation {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+  padding: 10px;
+}
+#logoutBtn {
+  margin-top: 20px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 25px;
+  cursor: pointer;
+}
+#logoutBtn:hover {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+/* ---------- PREMIUM ---------- */
+.premium-info {
+  max-width: 500px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.premium-info ul {
+  text-align: left;
+  margin-bottom: 20px;
+  list-style: none;
+}
+.premium-info li {
+  margin: 10px 0;
+  position: relative;
+  padding-left: 15px;
+}
+.premium-info li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #fff;
+}
+.premium-btn {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.premium-btn:hover {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+/* ---------- NAVBAR ---------- */
+#navbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 15px;
+  padding: 8px 15px;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+.nav-btn {
+  color: #fff;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.nav-btn:hover { opacity: 0.7; }
+.nav-btn.active { text-shadow: 0 0 8px #fff; }
+
+/* ---------- BACKGROUND DECOR ---------- */
+.background {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: float 10s infinite alternate;
+}
+.c1 { width: 400px; height: 400px; top: -100px; left: -100px; animation-delay: 0s; }
+.c2 { width: 300px; height: 300px; bottom: -80px; right: -100px; animation-delay: 2s; }
+.c3 { width: 200px; height: 200px; top: 30%; right: 20%; animation-delay: 4s; }
+@keyframes float {
+  from { transform: translateY(0); opacity: 0.4; }
+  to { transform: translateY(-20px); opacity: 0.8; }
+}
+
+.grid {
+  position: absolute;
+  width: 100%; height: 100%;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  opacity: 0.5;
+  padding: 5px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  .register-box { padding: 20px; }
+  .chat-box { height: 50vh; }
+  #navbar { gap: 5px; padding: 5px 10px; }
+  .nav-btn { font-size: 1rem; }
+  .premium-info { padding: 15px; }
+}
+@media (min-width: 1200px) {
+  .news-container { grid-template-columns: repeat(4, 1fr); }
+  #lessonsContainer { grid-template-columns: repeat(4, 1fr); }
+}                   
+@media (max-width: 400px) {
+  .register-box { padding: 15px; }
+  .chat-box { height: 45vh; }
+  #navbar { gap: 3px; padding: 3px 8px; }             
+  .nav-btn { font-size: 0.9rem; }
+}
+@media (max-width: 300px) {
+  .register-box { padding: 10px; }
+  .chat-box { height: 40vh; }
+  #navbar { gap: 2px; padding: 2px 5px; }             
+  .nav-btn { font-size: 0.8rem; }
+}
+/* ======================================================= */
+/* END OF STYLE.CSS */  
+/* ======================================================= */

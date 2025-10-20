@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>ENT Mentor - Мақсат таңдау</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      transition: opacity 0.5s;
+    }
+
+    .goal-box {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 15px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(0, 200, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      color: #00bfff;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .score {
+      font-size: 50px;
+      font-weight: 700;
+      margin: 10px 0;
+      color: #00bfff;
+      text-shadow: 0 0 15px rgba(0,191,255,0.4);
+      transition: 0.3s;
+    }
+
+    .emoji {
+      font-size: 42px;
+      margin: 10px 0;
+      transition: 0.3s ease;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      margin-top: 15px;
+      border-radius: 10px;
+      outline: none;
+      appearance: none;
+      background: linear-gradient(90deg, #0040ff, #00bfff);
+    }
+
+    /* Ползунок */
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #0077ff, #00aaff);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(0,191,255,0.3);
+    }
+
+    button:hover {
+      transform: scale(1.03);
+      background: linear-gradient(90deg, #00aaff, #0077ff);
+    }
+
+    .footer {
+      color: #777;
+      font-size: 13px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="goal-box">
+    <h2 id="title">Мақсатыңызды таңдаңыз</h2>
+    <p id="subtitle">ЕНТ бойынша мақсатты баллды көрсетіңіз.</p>
+
+    <div class="score" id="score">105</div>
+    <div class="emoji" id="emoji">🔥</div>
+
+    <input type="range" id="goalRange" min="50" max="140" value="105">
+    <button id="nextBtn">Келесі</button>
+
+    <p class="footer" id="footerText">Кейін жүйе сіздің мақсатыңызға сәйкес дайындық жоспарын ұсынады.</p>
+  </div>
+
+  <script>
+    // Берем язык из localStorage
+    const lang = localStorage.getItem("ent_lang") || "kk";
+
+    // Тексты для 2 языков
+    const texts = {
+      kk: {
+        title: "Мақсатыңызды таңдаңыз",
+        subtitle: "ЕНТ бойынша мақсатты баллды көрсетіңіз.",
+        next: "Келесі",
+        footer: "Кейін жүйе сіздің мақсатыңызға сәйкес дайындық жоспарын ұсынады.",
+      },
+      ru: {
+        title: "Выбери свою цель",
+        subtitle: "Укажи целевой балл по ЕНТ.",
+        next: "Далее",
+        footer: "Позже система предложит план подготовки под твою цель.",
+      }
+    };
+
+    // Применяем язык при загрузке
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("title").textContent = texts[lang].title;
+      document.getElementById("subtitle").textContent = texts[lang].subtitle;
+      document.getElementById("nextBtn").textContent = texts[lang].next;
+      document.getElementById("footerText").textContent = texts[lang].footer;
+    });
+
+    // Логика ползунка
+    const range = document.getElementById("goalRange");
+    const score = document.getElementById("score");
+    const emoji = document.getElementById("emoji");
+    const nextBtn = document.getElementById("nextBtn");
+
+    range.addEventListener("input", () => {
+      const val = parseInt(range.value);
+      score.textContent = val;
+
+      // Меняем эмодзи по уровню
+      if (val < 70) emoji.textContent = "🥺";
+      else if (val < 85) emoji.textContent = "🤨";
+      else if (val < 95) emoji.textContent = "😏";
+      else if (val < 110) emoji.textContent = "🔥";
+      else if (val < 125) emoji.textContent = "🚀";
+      else emoji.textContent = "👑";
+
+      // Изменение подсветки цифры
+      score.style.color = val > 120 ? "#00ffb0" : "#00bfff";
+    });
+
+    // Сохранение цели и переход на главную
+    nextBtn.addEventListener("click", () => {
+      const user = JSON.parse(localStorage.getItem("user")) || {};
+      user.goal = range.value;
+      localStorage.setItem("user", JSON.stringify(user));
+      document.body.style.opacity = "0";
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 600);
+    });
+  </script>
+
+</body>
+</html>

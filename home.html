@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>ENT Mentor - Басты бет</title>
+  <style>
+    body {
+      background-color: #000;
+      color: white;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      background: #001820;
+      color: #00bfff;
+      padding: 15px 0;
+      font-size: 22px;
+      font-weight: 600;
+      text-shadow: 0 0 12px #00bfff;
+    }
+
+    main {
+      padding: 15px 20px 80px;
+    }
+
+    /* --- Новости --- */
+    .ad-block {
+      background: linear-gradient(90deg, #0077ff, #00aaff);
+      border-radius: 10px;
+      padding: 10px 15px;
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .news-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 12px 15px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 10px rgba(0,191,255,0.2);
+    }
+
+    .news-item h3 {
+      color: #00bfff;
+      margin-bottom: 5px;
+    }
+
+    /* --- Пробный тест --- */
+    .test-container {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,191,255,0.2);
+    }
+
+    .question {
+      margin-bottom: 15px;
+    }
+
+    .test-btn {
+      background: linear-gradient(90deg, #0077ff, #00aaff);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      padding: 10px 25px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    /* --- ЕНТ-ға дайындық --- */
+    .prep-container {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,191,255,0.2);
+    }
+
+    .prep-item {
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .prep-item h4 {
+      color: #00bfff;
+      margin-bottom: 6px;
+    }
+
+    .prep-checklist input {
+      margin-right: 6px;
+    }
+
+    /* --- Чат с ИИ --- */
+    .chat-box {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 15px;
+      height: 350px;
+      overflow-y: auto;
+    }
+    .message {
+      margin: 10px 0;
+      padding: 8px 10px;
+      border-radius: 10px;
+      max-width: 70%;
+    }
+    .user {
+      background: #0077ff;
+      align-self: flex-end;
+      margin-left: auto;
+    }
+    .bot {
+      background: #222;
+      color: #00bfff;
+    }
+    .chat-input {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+    .chat-input button {
+      background: linear-gradient(90deg, #0077ff, #00aaff);
+      border: none;
+      color: white;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* --- Профиль --- */
+    .profile {
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,191,255,0.3);
+    }
+    .profile img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid #00bfff;
+      box-shadow: 0 0 20px rgba(0,191,255,0.6);
+    }
+    .profile h2 {
+      color: #00bfff;
+      margin: 10px 0;
+    }
+
+    /* --- Навигация --- */
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(255,255,255,0.05);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 70px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+    nav div {
+      text-align: center;
+      color: #aaa;
+      flex: 1;
+      padding-top: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    nav div:hover {
+      color: #00bfff;
+    }
+    .active {
+      color: #00bfff;
+      text-shadow: 0 0 8px #00bfff;
+      border-top: 2px solid #00bfff;
+    }
+  </style>
+</head>
+<body>
+
+<header id="pageTitle">Басты бет</header>
+
+<main>
+  <!-- Новости -->
+  <section id="section-news" class="section">
+    <div class="ad-block">📢 ENT Mentor-да жаңа мүмкіндіктер! Курстарға 20% жеңілдік 🎉</div>
+    <div class="news-item">
+      <h3>Жаңалық!</h3>
+      <p>2025 жылғы ЕНТ форматындағы өзгерістер жарияланды. Толық ақпарат — жаңалықтарда.</p>
+    </div>
+    <div class="news-item">
+      <h3>Мотивациялық апта!</h3>
+      <p>Күн сайын жаңа кеңестер мен видеолар 💪</p>
+    </div>
+  </section>
+
+  <!-- Пробный ЕНТ -->
+  <section id="section-test" class="section" style="display:none;">
+    <div class="test-container">
+      <h2>🧠 Пробный ЕНТ</h2>
+      <div id="quiz">
+        <div class="question" data-correct="b">1. Формула площади круга?<br>
+          <input type="radio" name="q1" value="a"> P = 2πr<br>
+          <input type="radio" name="q1" value="b"> S = πr²<br>
+          <input type="radio" name="q1" value="c"> S = 4r²
+        </div>
+        <div class="question" data-correct="a">2. Химиялық элементтің ең кіші бөлігі?<br>
+          <input type="radio" name="q2" value="a"> Атом<br>
+          <input type="radio" name="q2" value="b"> Молекула<br>
+          <input type="radio" name="q2" value="c"> Нейтрон
+        </div>
+        <div class="question" data-correct="c">3. “Қозғалыс – өмір” деген сөз кімге тән?<br>
+          <input type="radio" name="q3" value="a"> Гиппократ<br>
+          <input type="radio" name="q3" value="b"> Дарвин<br>
+          <input type="radio" name="q3" value="c"> Аристотель
+        </div>
+        <button class="test-btn" onclick="checkTest()">✅ Завершить тест</button>
+        <p id="testResult"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ЕНТ-ға дайындық -->
+  <section id="section-prep" class="section" style="display:none;">
+    <div class="prep-container">
+      <h3>🎯 ЕНТ-ға дайындық</h3>
+      <div class="prep-item">
+        <h4>📘 1. Күнделікті мақсат қой</h4>
+        <p>Кем дегенде 1 тақырыпты қайтала. Мысалы: “Алгебра: квадрат теңдеу”.</p>
+      </div>
+      <div class="prep-item">
+        <h4>🧮 2. Мини-тест тапсыр</h4>
+        <div class="prep-checklist">
+          <label><input type="checkbox">Математика</label><br>
+          <label><input type="checkbox">Физика</label><br>
+          <label><input type="checkbox">Қазақстан тарихы</label>
+        </div>
+      </div>
+      <div class="prep-item">
+        <h4>🧘 3. Демалуды ұмытпа</h4>
+        <p>Әр 45 минут сайын аздап демал, таза ауа жұт.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ИИ Психолог -->
+  <section id="section-ai" class="section" style="display:none;">
+    <h3>🤖 AI Психолог</h3>
+    <div class="chat-box" id="chatBox"></div>
+    <div class="chat-input">
+      <input id="chatInput" placeholder="Жазыңыз / Напишите...">
+      <button onclick="sendMessage()">📨</button>
+    </div>
+  </section>
+
+  <!-- Профиль -->
+  <section id="section-profile" class="section" style="display:none;">
+    <div class="profile">
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user">
+      <h2 id="profileTitle">Профиль / Профиль</h2>
+      <p>🌍 ENT Mentor — сіздің жеке көмекшіңіз!</p>
+      <p>🎯 Мақсат: 140 балл</p>
+      <button class="test-btn">⚙️ Параметрлер / Настройки</button>
+    </div>
+  </section>
+</main>
+
+<nav>
+  <div id="tab-news" class="active">📰<br>Жаңалықтар</div>
+  <div id="tab-test">🧠<br>Пробный ЕНТ</div>
+  <div id="tab-prep">🎯<br>Дайындық</div>
+  <div id="tab-ai">🤖<br>ИИ Психолог</div>
+  <div id="tab-profile">👤<br>Профиль</div>
+</nav>
+
+<script>
+const tabs = document.querySelectorAll("nav div");
+const sections = document.querySelectorAll(".section");
+
+// --- Переключение вкладок ---
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    sections.forEach(s => s.style.display = "none");
+    document.getElementById(`section-${tab.id.split('-')[1]}`).style.display = "block";
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  sections.forEach(s => s.style.display = "none");
+  document.getElementById("section-news").style.display = "block";
+  applyLanguage();
+  loadProfile();
+});
+
+// --- Языковые тексты ---
+function applyLanguage() {
+  const lang = localStorage.getItem("ent_lang") || "kk";
+  const texts = {
+    kk: {
+      title: "Басты бет",
+      tabs: ["Жаңалықтар", "Пробный ЕНТ", "Дайындық", "ИИ Психолог", "Профиль"],
+      ad: "📢 ENT Mentor-да жаңа мүмкіндіктер! Курстарға 20% жеңілдік 🎉",
+      news1: "2025 жылғы ЕНТ форматындағы өзгерістер жарияланды. Толық ақпарат — жаңалықтарда.",
+      news2: "Күн сайын жаңа кеңестер мен видеолар 💪",
+      prep: "🎯 ЕНТ-ға дайындық",
+      psychologist: "🤖 AI Психолог",
+      testTitle: "🧠 Пробный ЕНТ",
+      profileHelper: "🌍 ENT Mentor — сіздің жеке көмекшіңіз!",
+      goalText: "🎯 Мақсат",
+      settings: "⚙️ Параметрлер"
+    },
+    ru: {
+      title: "Главная",
+      tabs: ["Новости", "Пробный ЕНТ", "Подготовка", "ИИ Психолог", "Профиль"],
+      ad: "📢 Новые возможности в ENT Mentor! Скидка 20% на курсы 🎉",
+      news1: "Опубликованы изменения в формате ЕНТ 2025 года. Подробности в разделе Новости.",
+      news2: "Каждый день новые советы и видео 💪",
+      prep: "🎯 Подготовка к ЕНТ",
+      psychologist: "🤖 AI Психолог",
+      testTitle: "🧠 Пробный ЕНТ",
+      profileHelper: "🌍 ENT Mentor — ваш личный помощник!",
+      goalText: "🎯 Цель",
+      settings: "⚙️ Настройки"
+    }
+  };
+
+  const t = texts[lang];
+  document.getElementById("pageTitle").innerText = t.title;
+  const adEl = document.querySelector(".ad-block");
+  if (adEl) adEl.innerText = t.ad;
+
+  const newsH = document.querySelectorAll(".news-item h3");
+  const newsP = document.querySelectorAll(".news-item p");
+  if (newsH.length >= 2) {
+    newsH[0].innerText = t.tabs[0];
+    newsP[0].innerText = t.news1;
+    newsH[1].innerText = "Мотивация / Мотивация";
+    newsP[1].innerText = t.news2;
+  }
+
+  // Перевод названий вкладок
+  const tabNews = document.getElementById("tab-news");
+  const tabTest = document.getElementById("tab-test");
+  const tabPrep = document.getElementById("tab-prep");
+  const tabAi = document.getElementById("tab-ai");
+  const tabProfile = document.getElementById("tab-profile");
+  if (tabNews) tabNews.innerHTML = `📰<br>${t.tabs[0]}`;
+  if (tabTest) tabTest.innerHTML = `🧠<br>${t.tabs[1]}`;
+  if (tabPrep) tabPrep.innerHTML = `🎯<br>${t.tabs[2]}`;
+  if (tabAi) tabAi.innerHTML = `🤖<br>${t.tabs[3]}`;
+  if (tabProfile) tabProfile.innerHTML = `👤<br>${t.tabs[4]}`;
+
+  // Название разделов
+  const prepHeader = document.querySelector("#section-prep h3");
+  if (prepHeader) prepHeader.textContent = t.prep;
+
+  const testHeader = document.querySelector("#section-test h2");
+  if (testHeader) testHeader.textContent = t.testTitle;
+}
+
+// --- Пробный ЕНТ ---
+function checkTest() {
+  let score = 0;
+  document.querySelectorAll(".question").forEach(q => {
+    const correct = q.dataset.correct;
+    const selected = q.querySelector("input:checked");
+    if (selected && selected.value === correct) score++;
+  });
+  const lang = localStorage.getItem("ent_lang") || "kk";
+  document.getElementById("testResult").innerText = 
+    lang === "kk" ? `✅ ${score}/3 дұрыс` : `✅ ${score}/3 правильных`;
+}
+
+// --- ИИ Психолог ---
+function sendMessage() {
+  const input = document.getElementById("chatInput");
+  const chatBox = document.getElementById("chatBox");
+  const text = input.value.trim();
+  if (!text) return;
+  chatBox.innerHTML += `<div class='message user'>${text}</div>`;
+  input.value = "";
+  setTimeout(() => {
+    chatBox.innerHTML += `<div class='message bot'>🤖: ${text.includes("мотивация") || text.includes("motivation") ? "Ешқашан берілме! 💪 / Никогда не сдавайся!" : "Жарайсың! Алға!"}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }, 600);
+}
+
+// --- Профиль ---
+function loadProfile() {
+  const user = JSON.parse(localStorage.getItem("user")) || {};
+  const lang = localStorage.getItem("ent_lang") || "kk";
+
+  const texts = {
+    kk: { helper: "🌍 ENT Mentor — сіздің жеке көмекшіңіз!", goal: "🎯 Мақсат", settings: "⚙️ Параметрлер" },
+    ru: { helper: "🌍 ENT Mentor — ваш личный помощник!", goal: "🎯 Цель", settings: "⚙️ Настройки" }
+  };
+
+  const t = texts[lang];
+  const profileSection = document.getElementById("section-profile");
+
+  if (profileSection) {
+    const h2 = profileSection.querySelector("h2");
+    if (h2) h2.innerText = user.name || "Пайдаланушы / Пользователь";
+
+    const helperP = profileSection.querySelector("p:nth-of-type(1)");
+    if (helperP) helperP.innerText = t.helper;
+
+    const goalEl = profileSection.querySelector("p:nth-of-type(2)");
+    if (goalEl) {
+      if (user.goal) {
+        let icon = "🎯";
+        const g = parseInt(user.goal);
+        if (g >= 130) icon = "👑";
+        else if (g >= 110) icon = "🚀";
+        else if (g >= 90) icon = "🔥";
+        else if (g >= 70) icon = "💪";
+        else icon = "🙂";
+        goalEl.innerText = `${icon} ${t.goal}: ${user.goal} балл`;
+      } else {
+        goalEl.innerText = `${t.goal}: -`;
+      }
+    }
+
+    const settingsBtn = profileSection.querySelector("button");
+    if (settingsBtn) settingsBtn.innerText = t.settings;
+  }
+}
+</script>
+
+</body>
+</html>

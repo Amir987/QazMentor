@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>ENT Mentor - Тіркелу</title>
+  <style>
+    body {
+      background-color: #000;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      transition: opacity 0.5s;
+    }
+
+    .register-container {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      border-radius: 15px;
+      width: 360px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(0, 191, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+      animation: glowPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 15px rgba(0, 191, 255, 0.4); }
+      50% { box-shadow: 0 0 35px rgba(0, 191, 255, 0.8); }
+      100% { box-shadow: 0 0 15px rgba(0, 191, 255, 0.4); }
+    }
+
+    h2 {
+      color: white;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.08);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #00bfff;
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.4);
+    }
+
+    button {
+      width: 94%;
+      padding: 12px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #0077ff, #00aaff);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #00aaff, #0077ff);
+      transform: scale(1.03);
+    }
+
+    #messageBox {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    p {
+      color: #999;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    a {
+      color: #00bfff;
+      text-decoration: none;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+
+  <div class="register-container">
+    <img src="C:\Users\Амирлан\Desktop\new\avatar.png" alt="ENT Mentor Logo" class="logo">
+    <h2 id="title">Тіркелу</h2>
+
+    <form id="registerForm">
+      <input id="fullname" type="text" placeholder="Атыңыз" required>
+      <input id="email" type="email" placeholder="Электрондық пошта" required>
+      <input id="password" type="password" placeholder="Құпиясөз" required>
+      <input id="confirmPassword" type="password" placeholder="Құпиясөзді растаңыз" required>
+      <button type="submit" id="registerBtn">Жалғастыру</button>
+    </form>
+
+    <p id="loginText">Аккаунтыңыз бар ма? <a href="#">Кіру</a></p>
+    <p style="font-size:11px; color:#777;">
+      Тіркелу арқылы сіз біздің <a href="#">құпиялылық саясатымен</a> келісесіз.
+    </p>
+
+    <div id="messageBox"></div>
+  </div>
+
+  <script>
+    // Язык из localStorage
+    const lang = localStorage.getItem("ent_lang") || "kk";
+
+    const texts = {
+      kk: {
+        title: "Тіркелу",
+        name: "Атыңыз",
+        email: "Электрондық пошта",
+        pass: "Құпиясөз",
+        conf: "Құпиясөзді растаңыз",
+        btn: "Жалғастыру",
+        exist: "Аккаунтыңыз бар ма?",
+        login: "Кіру",
+        success: "✅ Тіркелу сәтті өтті!",
+        fill: "⚠️ Барлық жолдарды толтырыңыз!",
+        mismatch: "❌ Құпиясөздер сәйкес келмейді!",
+        short: "🔒 Құпиясөз кемінде 6 таңба болуы керек!",
+      },
+      ru: {
+        title: "Регистрация",
+        name: "Ваше имя",
+        email: "Электронная почта",
+        pass: "Пароль",
+        conf: "Подтвердите пароль",
+        btn: "Продолжить",
+        exist: "Уже есть аккаунт?",
+        login: "Войти",
+        success: "✅ Регистрация прошла успешно!",
+        fill: "⚠️ Заполните все поля!",
+        mismatch: "❌ Пароли не совпадают!",
+        short: "🔒 Минимум 6 символов!",
+      }
+    };
+
+    // Применяем язык
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("title").textContent = texts[lang].title;
+      document.getElementById("fullname").placeholder = texts[lang].name;
+      document.getElementById("email").placeholder = texts[lang].email;
+      document.getElementById("password").placeholder = texts[lang].pass;
+      document.getElementById("confirmPassword").placeholder = texts[lang].conf;
+      document.getElementById("registerBtn").textContent = texts[lang].btn;
+      document.getElementById("loginText").innerHTML =
+        `${texts[lang].exist} <a href="#">${texts[lang].login}</a>`;
+    });
+
+    const form = document.getElementById("registerForm");
+    const fullname = document.getElementById("fullname");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const messageBox = document.getElementById("messageBox");
+    const registerBtn = document.getElementById("registerBtn");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (!fullname.value.trim() || !email.value.trim() || !password.value.trim() || !confirmPassword.value.trim()) {
+        return showMessage(texts[lang].fill, "error");
+      }
+
+      if (password.value !== confirmPassword.value) {
+        return showMessage(texts[lang].mismatch, "error");
+      }
+
+      if (password.value.length < 6) {
+        return showMessage(texts[lang].short, "error");
+      }
+
+      registerBtn.disabled = true;
+      registerBtn.textContent = texts[lang].btn + "...";
+
+      // Сохраняем пользователя
+      localStorage.setItem("user", JSON.stringify({
+        name: fullname.value.trim(),
+        email: email.value.trim(),
+        goal: null,
+        lang: lang
+      }));
+
+      showMessage(texts[lang].success, "success");
+
+      setTimeout(() => {
+        document.body.style.opacity = "0";
+        setTimeout(() => {
+          window.location.href = "goal.html";
+        }, 600);
+      }, 1000);
+    });
+
+    function showMessage(text, type) {
+      messageBox.textContent = text;
+      messageBox.style.display = "block";
+      messageBox.style.background = type === "success" ? "rgba(0,200,0,0.2)" : "rgba(255,0,0,0.2)";
+      messageBox.style.border = type === "success" ? "1px solid #00ff66" : "1px solid #ff4444";
+      messageBox.style.color = type === "success" ? "#00ff88" : "#ff8888";
+    }
+  </script>
+
+</body>
+</html>
